@@ -1,5 +1,1 @@
-# bloggo
-"# bloggo" 
-"# bloggo" 
-"# bloggo" 
-"# bloggo" 
+#bloggo is a blog application.
