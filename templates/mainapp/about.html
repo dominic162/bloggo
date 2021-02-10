@@ -1,0 +1,122 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}
+About Us
+{% endblock %}
+
+{%block style%}
+<style>
+  .skew {
+    height: 14vh;
+    background-color: #2c3e50;
+    transform: skewY(3deg);
+    transform-origin: top left;
+    z-index: 0;
+  }
+  form{
+    font-weight: 600;
+    font-size: 17px;
+  }
+  li{
+    margin-top: 2px;
+  }
+</style>
+{%endblock%}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="container my-2">
+  <div style="margin-top: 30px;">
+
+    <h2 style="text-align: center; margin: 20px auto;">Welcome to the world of Bloggers: </h2>
+    <p style="font-size: 20px;">
+      <b><a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a></b> is a website made for fun. Whether you are an introvert 😐, extrovert 😁, nerd 🤓 or the stud 😎,
+      there is something for you.
+      You can write blogs, read blogs. Tell your friends about <b><a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a></b> as it is said that
+    </p>
+    <p style="text-align: center; font-size: 22px;">
+      <b> <span style="text-align: center;">"</b> <u>Asli mza to sab ke sath aata hai</u> 😂 <b>"</b> </span>
+    </p>
+  </div>
+  <div style="margin: 50px auto;">
+    <h2>Team:</h2>
+    <div class="row"
+      style=" margin: 25px auto; font-size: 15px; font-weight: 500; box-sizing: border-box; color: rgb(55, 58, 42); border: 2px solid rgb(105, 66, 66); border-radius: 10px;">
+      <div class="col-md-4" style="margin-top: 15px; text-align: center; font-size: 20px;">
+        <img src="{% static 'mainapp/profile.jpg'%}"
+          style="margin-bottom: 10px; max-width: 200px; max-height: 200px; border: 3px solid rgb(14, 228, 156); border-radius: 50%;"
+          alt="profile photo">
+        <p><b> Nischey Khurana</b></p>
+      </div>
+
+      <div class="col" style="font-size: large; display: flex; justify-content: center; align-items: center;">
+        <div>
+          <div>
+            <p>
+              A passionate developer who is always trying to push boundaries in search of great breakthroughs.
+              A JC Bose University student and a passionate programmer who likes to learn new technologies in its free
+              time.
+            </p>
+          </div>
+          <div>
+            <p>Know more:</p>
+
+            <a href="https://github.com/nischey" target="_blank"><img
+                src="https://img.icons8.com/plasticine/70/000000/github.png" /></a>
+            <a href="https://www.instagram.com/nischey_khurana/" target="_blank"><img
+                src="https://img.icons8.com/doodle/60/000000/instagram-new.png" /></a>
+            <a href="https://www.linkedin.com/in/nischey-khurana-5400b41b7/" target="_blank"><img
+                src="https://img.icons8.com/carbon-copy/64/000000/linkedin.png" /></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<section class="skew">
+</section>
+<div style="background-color: #2c3e50; color: rgb(176, 238, 82); padding-bottom: 10px; ">
+  <div class="container">
+    <div class="contact " style="margin-bottom: 35px;">
+      <h2>Contact us: </h2>
+      <h5>Mail Us:</h5>
+      <img src="https://img.icons8.com/office/64/000000/gmail-login.png"
+        style="margin: 15px 10px;"><b>teambloggo@protonmail.com</b>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7 my-3">
+        <h5>Submit your message:</h5>
+        <div class="my-3" style="display: flex; justify-content: center; width: 100%; ">
+
+          <div>
+
+            <form action="" method="POST">
+              {% csrf_token %}
+              {{contactform|crispy }}
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-3">
+        <h5>Terms and conditions:</h5>
+        <ul>
+          <li>By using this site you are accepting all the terms and condition of <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;"><a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a></a> .</li>
+          <li>You are responsible for any activity that occurs under your screen name.</li>
+          <li>You are responsible for keeping your password secure.</li>
+          <li>Violation of any of these agreements will result in the termination of your <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a> account. While <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a> prohibits such conduct and content on its site, you understand and agree that <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a> cannot be responsible for the Content posted on its web site and you nonetheless may be exposed to such materials and that you use the <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a> service at your own risk.</li>
+          <li>We reserve the right to modify or terminate the <a href="{% url 'home' %}" style="color: inherit; text-decoration:underline ;">Bloggo</a> service for any reason, without notice at any time.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+  $('#aboutl').addClass('active')
+</script>
+{% endblock %}

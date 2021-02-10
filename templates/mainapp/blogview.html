@@ -1,0 +1,36 @@
+{%extends 'mainapp/base.html'%}
+{%block title%}
+  {{object.title}}
+{%endblock%}
+
+{%block content%}
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <strong>Here's the blog you selected. Enjoy reading it</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+<div class="container">
+  
+  <ul class="list-group">
+    <img src="{{object.image.url}}" class="img-fluid rounded mx-auto" alt="Responsive image" style="max-height: 550px; max-width: 550px; width: 100%;">
+    <li class="list-group-item my-2">
+      <h1>{{object.title}}</h1>
+    </li>
+    <li class="list-group-item my-2">{{object.content}}</li>
+    <li class="list-group-item my-2" style="font-size: 20px;">
+      Tags:
+      {% for tag in object.tags.all%}
+        <a style="margin: 1px 1px;" href="{% url 'post_by_tags' tag.slug %}" class="badge badge-secondary" >{{tag}}</a>
+      {% endfor %}
+    </li>
+    <li class="list-group-item">
+      <p>Written By: 
+      <a href="{%url 'writer_info' object.written_by.slug %}"><span class="badge badge-secondary" style="font-size: 15px;">{{object.written_by}}</span></a></span>
+      </p>
+    </li>
+  </ul>
+</div>
+{%endblock%}

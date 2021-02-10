@@ -1,0 +1,70 @@
+{%extends 'mainapp/base.html'%}
+{%block title%}
+Blogs
+{%endblock%}
+{%block style%}
+<style>
+    .carouselbtn{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+</style>
+{%endblock%}
+
+{%block content%}
+<div class="my-2 ">
+    <div class="container">
+        <h1>All Blogs:</h1>
+        <p style="font-size: x-large;">We're glad you came this far. Try other Blogs also:</p>
+    </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="container">
+            <div class="carousel-inner" >
+                <div class="carousel-item active">
+                    <ul class="list-group">
+                        {%for obj in object%}
+                        {%if forloop.counter|divisibleby:9%}
+                        </ul>
+                        </div>
+                        <div class="carousel-item">
+                        <ul class="list-group">
+                        {%endif%}
+                        <li class="list-group-item"><a href="{%url 'blog_info' obj.slug%}">{{obj.title}}</a><span
+                                class="float-right">Written By: 
+                                    <a href="{%url 'writer_info' obj.written_by.slug %}"><span
+                                        class="badge badge-secondary">{{obj.written_by}}</span></a></span>
+                        </li>
+                        {%endfor%}
+                        {% if extra %}
+                            {% for obj in extra %}
+                                <li class="list-group-item"><a href="{%url 'blog_info' obj.slug%}">{{obj.title}}</a><span
+                                        class="float-right">Written By: 
+                                            <a href="{%url 'writer_info' obj.written_by.slug %}"><span
+                                                class="badge badge-secondary">{{obj.written_by}}</span></a></span>
+                                </li>
+                            {%endfor%}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="carouselbtn my-3">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            {% for i in nslides %}
+                <button data-target="#carouselExampleIndicators" data-slide-to={{forloop.counter0}} type="button" class="btn btn-secondary">{{forloop.counter}}</button>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+{%endblock%}
+{% block script %}
+  <script>
+    $('#blogl').addClass('active')
+  </script>
+{% endblock %}

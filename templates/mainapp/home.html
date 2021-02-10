@@ -1,0 +1,120 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}
+  Bloggo
+{% endblock %}
+
+  {%block addlink%}
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  {%endblock%}
+
+{% block style %}
+<style>
+  .sizeimg {
+    max-height: 600px;
+  }
+
+  .headings {
+    z-index: 1000;
+    font-size: xx-large;
+  }
+
+  .scaleit a,
+  .scaleit a:hover {
+    font-size: large;
+    color: #131313;
+    text-decoration-color: none;
+    font-weight: 400;
+  }
+</style>
+{% endblock %}
+
+{%block content%}
+
+
+
+<div>
+  <div class="alert alert-success alert-dismissible fade show my-0" role="alert">
+    <strong>Welcome</strong> Finally you're here! We were waiting for you.<span>&#128522;</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="container">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="#">
+            <img src="{%static 'mainapp/writeblog.jpg'%}" class="d-block w-100 sizeimg" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h3 class="text-body headings">Let's Blog <br /> Read Blogs</h3>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="{%static 'mainapp/blog2.jpg'%}" class="d-block w-100 sizeimg" alt="...">
+
+          </a>
+        </div>
+        
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bg-dark " aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <h1 class="my-3">Read Some Blogs:</h1>
+
+
+    {%for obj in objects%}
+    {%if forloop.counter|divisibleby:2%}
+    <div class="scaleit card border-warning mb-3 float-right shadow p-3 mb-5 " data-aos="fade-left" data-aos-delay="300"
+      style="max-width: 800px; background-color: #F7be7d; ">
+      {%else%}
+      <div class="scaleit card border-secondary mb-3 float-left shadow p-3 mb-5" data-aos="fade-right"
+        data-aos-delay="300" style="max-width: 800px; background-color: #99d5f3; ">
+        {%endif%}
+        <a href="{%url 'blog_info' obj.slug%}">
+          <div class="row no-gutters">
+            <div class="col-md-4 my-2">
+              <img src="{{obj.image.url}}" class="card-img" alt="{{obj.title}}"
+                style="min-width: 250px; max-width: 300px;">
+            </div>
+            <div class="col-md-5">
+              <div class="card-body">
+                <h5 class="card-title">{{obj.title}}</h5>
+                <p class="card-text">{{obj.content|slice:":100"}}...</p>
+                  {% for tag in obj.tags.all|slice:":6" %}
+                  <a style="margin: 1px 1px;" href="{% url 'post_by_tags' tag.slug %}" class="badge badge-success" >{{tag}}</a>
+                  {% endfor %}
+                <p class="card-text"><small class="text-muted" style="font-size: 15px;">by: <a
+                      style=" text-decoration: underline;"
+                      href="{% url 'writer_info' obj.written_by.slug %}"><b>{{obj.written_by.username}}</b></a></small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+</div>
+{%endblock%}
+{% block script %}
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+  $('#homel').addClass('active');
+  
+</script>
+{% endblock %}
